@@ -1,0 +1,17 @@
+{
+  "author": "Felix Geisendörfer <felix@debuggable.com> (http://debuggable.com/)",
+  "name": "stream-sequence",
+  "description": "A stream that emits multiple other streams one after another.",
+  "version": "0.0.0",
+  "homepage": "https://github.com/felixge/node-stream-sequence",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/felixge/node-stream-sequence.git"
+  },
+  "main": "./lib/stream_sequence",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
