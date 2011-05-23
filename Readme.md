@@ -41,4 +41,20 @@ streamSequence.append(function() {
 streamSequence.pipe(fs.createWriteStream('combined.txt'));
 ```
 
+Last but not least, you can also ask stream-sequence to apply back pressure
+to the queued streams as neccesary to minimize buffering:
 
+``` javascript
+var StreamSequence = require('stream-sequence');
+var fs = require('fs');
+
+var streamSequence = StreamSequence.create({pauseStreams: true});
+streamSequence.append(fs.createReadStream('file1.txt'));
+streamSequence.append(fs.createReadStream('file2.txt'));
+
+streamSequence.pipe(fs.createWriteStream('combined.txt'));
+```
+
+In the case of files that is probably the best of the 3 approaches. But if you
+are dealing with streams that you don't want to slow down, you should consider
+either approach #1 or #2.
