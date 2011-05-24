@@ -8,5 +8,5 @@ common.dir = {
   tmp: root + '/test/tmp',
 };
 
-common.StreamSequence = require(root);
+common.CombinedStream = require(root);
 common.assert = require('assert');
