@@ -8,13 +8,9 @@ var FILE2 = common.dir.fixture + '/file2.txt';
 var EXPECTED = fs.readFileSync(FILE1) + fs.readFileSync(FILE2);
 
 (function testDelayedStreams() {
-  var combinedStream = CombinedStream.create({pauseStreams: false, maxDataSize: 10});
+  var combinedStream = CombinedStream.create({pauseStreams: false, maxDataSize: 20736});
   combinedStream.append(fs.createReadStream(FILE1));
   combinedStream.append(fs.createReadStream(FILE2));
-
-  var tmpFile = common.dir.tmp + '/combined.txt';
-  var dest = fs.createWriteStream(tmpFile);
-  combinedStream.pipe(dest);
 
   var gotErr = null;
   combinedStream.on('error', function(err) {
