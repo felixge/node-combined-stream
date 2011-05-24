@@ -12,6 +12,10 @@
   "engines": {
     "node": "*"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "delayed-stream": "0.0.5"
+  },
+  "devDependencies": {
+    "far": "0.0.1"
+  }
 }
