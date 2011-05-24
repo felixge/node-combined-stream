@@ -12,8 +12,8 @@ var EXPECTED = fs.readFileSync(FILE1) + fs.readFileSync(FILE2);
   combinedStream.append(function(next) {
     next(fs.createReadStream(FILE1));
   });
-  combinedStream.append(function() {
-    return fs.createReadStream(FILE2);
+  combinedStream.append(function(next) {
+    next(fs.createReadStream(FILE2));
   });
 
   var tmpFile = common.dir.tmp + '/combined.txt';
