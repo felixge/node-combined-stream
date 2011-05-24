@@ -57,3 +57,6 @@ combinedStream.append(function(next) {
 combinedStream.pipe(fs.createWriteStream('combined.txt'));
 ```
 
+## License
+
+combined-stream is licensed under the MIT license.
