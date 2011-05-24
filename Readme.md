@@ -31,11 +31,15 @@ var StreamSequence = require('stream-sequence');
 var fs = require('fs');
 
 var streamSequence = StreamSequence.create();
-streamSequence.append(function(cb) {
-  cb(null, fs.createReadStream('file1.txt'));
-});
 streamSequence.append(function() {
-  cb(null, fs.createReadStream('file2.txt'));
+  // You can either return streams directly
+  return fs.createReadStream('file1.txt');
+});
+streamSequence.append(function(next) {
+  setTimeout(function() {
+    // Or provide them to the next() function in an async fashion
+    next(fs.createReadStream('file2.txt'));
+  }, 100);
 });
 
 streamSequence.pipe(fs.createWriteStream('combined.txt'));
