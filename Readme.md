@@ -4,7 +4,9 @@ A stream that emits multiple other streams one after another.
 
 ## Installation
 
-This module is not ready yet.
+``` bash
+npm install combined-stream
+```
 
 ## Usage
 
