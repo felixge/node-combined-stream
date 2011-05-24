@@ -57,6 +57,67 @@ combinedStream.append(function(next) {
 combinedStream.pipe(fs.createWriteStream('combined.txt'));
 ```
 
+## API
+
+### CombinedStream.create([options])
+
+Returns a new combined stream object. Available options are:
+
+* `maxDataSize`
+* `pauseStreams`
+
+The effect of those options is described below.
+
+### combinedStream.pauseStreams = true
+
+Whether to apply back pressure to the underlaying streams. If set to `false`,
+the underlaying streams will never be paused. If set to `true`, the
+underlaying streams will be paused right after being appended, as well as when
+`delayedStream.pipe()` wants to throttle.
+
+### combinedStream.maxDataSize = 2 * 1024 * 1024
+
+The maximum amount of bytes (or characters) to buffer for all source streams.
+If this value is exceeded, `combinedStream` emits an `'error'` event.
+
+### combinedStream.dataSize = 0
+
+The amount of bytes (or characters) currently buffered by `combinedStream`.
+
+### combinedStream.append(stream)
+
+Appends the given `stream` to the combinedStream object. If `pauseStreams` is
+set to `true, this stream will also be paused right away.
+
+`streams` can also be a function that takes one parameter called `next`. `next`
+is a function that must be invoked in order to provide the `next` stream, see
+example above.
+
+Regardless of how the `stream` is appended, combined-stream always attaches an
+`'error'` listener to it, so you don't have to do that manually.
+
+### combinedStream.write(data)
+
+You should not call this, `combinedStream` takes care of piping the appended
+streams into itself for you.
+
+### combinedStream.resume()
+
+Causes `combinedStream` to start drain the streams it manages. The function is
+idempotent, and also emits a `'resume'` event each time which usually goes to
+the stream that is currently being drained.
+
+### combinedStream.pause();
+
+If `combinedStream.pauseStreams` is set to `false`, this does nothing.
+Otherwise a `'pause'` event is emitted, this goes to the stream that is
+currently being drained, so you can use it to apply back pressure.
+
+### combinedStream.end();
+
+Sets `combinedStream.writable` to false, emits an `'end'` event, and removes
+all streams from the queue.
+
 ## License
 
 combined-stream is licensed under the MIT license.
