@@ -98,6 +98,8 @@ example above.
 Regardless of how the `stream` is appended, combined-stream always attaches an
 `'error'` listener to it, so you don't have to do that manually.
 
+Special case: `stream` can also be a String or Buffer.
+
 ### combinedStream.write(data)
 
 You should not call this, `combinedStream` takes care of piping the appended
