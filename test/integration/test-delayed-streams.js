@@ -6,6 +6,7 @@ var fs = require('fs');
 var FILE1 = common.dir.fixture + '/file1.txt';
 var FILE2 = common.dir.fixture + '/file2.txt';
 var EXPECTED = fs.readFileSync(FILE1) + fs.readFileSync(FILE2);
+var GOT;
 
 (function testDelayedStreams() {
   var combinedStream = CombinedStream.create();
@@ -24,7 +25,10 @@ var EXPECTED = fs.readFileSync(FILE1) + fs.readFileSync(FILE2);
   combinedStream.pipe(dest);
 
   dest.on('end', function() {
-    var written = fs.readFileSync(tmpFile, 'utf8');
-    assert.strictEqual(written, EXPECTED);
+    GOT = fs.readFileSync(tmpFile, 'utf8');
   });
 })();
+
+process.on('exit', function() {
+  assert.strictEqual(GOT, EXPECTED);
+});
