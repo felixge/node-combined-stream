@@ -24,11 +24,12 @@ var GOT;
   var dest = fs.createWriteStream(tmpFile);
   combinedStream.pipe(dest);
 
-  dest.on('end', function() {
+  dest.on('close', function() {
     GOT = fs.readFileSync(tmpFile, 'utf8');
   });
 })();
 
 process.on('exit', function() {
+  console.error(GOT.length, EXPECTED.length);
   assert.strictEqual(GOT, EXPECTED);
 });
