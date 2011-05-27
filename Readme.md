@@ -120,6 +120,11 @@ currently being drained, so you can use it to apply back pressure.
 Sets `combinedStream.writable` to false, emits an `'end'` event, and removes
 all streams from the queue.
 
+### combinedStream.destroy();
+
+Same as `combinedStream.end()`, except it emits a `'close'` event instead of
+`'end'`.
+
 ## License
 
 combined-stream is licensed under the MIT license.
