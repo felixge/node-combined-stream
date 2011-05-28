@@ -20,7 +20,9 @@ var GOT;
   combinedStream.append(fs.createReadStream(FILE1));
   combinedStream.append(BUFFER);
   combinedStream.append(fs.createReadStream(FILE2));
-  combinedStream.append(STRING);
+  combinedStream.append(function(next) {
+    next(STRING);
+  });
 
   var tmpFile = common.dir.tmp + '/combined-file1-buffer-file2-string.txt';
   var dest = fs.createWriteStream(tmpFile);
