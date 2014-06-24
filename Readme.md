@@ -1,4 +1,4 @@
-# combined-stream
+# combined-stream [![Build Status](https://travis-ci.org/felixge/node-combined-stream.svg?branch=master)](https://travis-ci.org/felixge/node-combined-stream)
 
 A stream that emits multiple other streams one after another.
 

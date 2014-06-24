@@ -1,1 +1,7 @@
+.gitignore
+.npmignore
+.travis.yml
+Makefile
+*.un~
+/node_modules
 /test
