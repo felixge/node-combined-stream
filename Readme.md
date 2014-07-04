@@ -49,11 +49,24 @@ var CombinedStream = require('combined-stream');
 var fs = require('fs');
 
 var combinedStream = CombinedStream.create();
+
 combinedStream.append(function(next) {
   next(fs.createReadStream('file1.txt'));
 });
+
 combinedStream.append(function(next) {
-  next(fs.createReadStream('file2.txt'));
+  fs.stat('file2.txt', function(err, stats) {
+    if (err || !stats.isFile()){
+      // don't append a stream:
+      next();
+    } else {
+      next(fs.createReadStream('file2.txt'));
+    }
+  });
+});
+
+combinedStream.append(function(next) {
+  next(fs.createReadStream('file3.txt'));
 });
 
 combinedStream.pipe(fs.createWriteStream('combined.txt'));

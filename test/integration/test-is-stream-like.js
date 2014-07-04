@@ -12,6 +12,12 @@ var foo = function(){};
   assert(! CombinedStream.isStreamLike("I am a string"));
   assert(! CombinedStream.isStreamLike(7));
   assert(! CombinedStream.isStreamLike(foo));
+  assert(! CombinedStream.isStreamLike(undefined));
+  assert(! CombinedStream.isStreamLike(null));
+  assert(! CombinedStream.isStreamLike({}));
+  assert(! CombinedStream.isStreamLike([]));
+  assert(! CombinedStream.isStreamLike([42, foo]));
+  assert(! CombinedStream.isStreamLike({ on: function(){} }));
 
   assert(CombinedStream.isStreamLike(fileStream));
 })();
