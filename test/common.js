@@ -2,6 +2,8 @@ var common = module.exports;
 
 var path = require('path');
 var fs = require('fs');
+var util = require('util');
+var Stream = require('stream').Stream;
 var root = path.join(__dirname, '..');
 
 common.dir = {
@@ -21,3 +23,28 @@ catch (e) {
 
 common.CombinedStream = require(root);
 common.assert = require('assert');
+
+
+function RecorderStream() {
+  if (!(this instanceof RecorderStream)) {
+    return new RecorderStream();
+  }
+  this.writable = true;
+  this.data = [];
+}
+util.inherits(RecorderStream,Stream);
+
+RecorderStream.prototype.write = function(chunk,encoding) {
+  this.data.push(chunk);
+  this.emit('data',chunk);
+}
+
+RecorderStream.prototype.end = function(chunk,encoding) {
+  this.emit('end');
+}
+
+RecorderStream.prototype.toString = function(){
+  return this.data;
+}
+
+common.RecorderStream = RecorderStream;
