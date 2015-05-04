@@ -1,3 +1,6 @@
 *.un~
 /node_modules
 /test/tmp
+
+Vim swap files
+.*.sw[a-z]
