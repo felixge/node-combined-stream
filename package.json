@@ -16,7 +16,7 @@
     "node": ">= 0.8"
   },
   "dependencies": {
-    "delayed-stream": "^1.0.0"
+    "delayed-stream": "~1.0.0"
   },
   "devDependencies": {
     "far": "~0.0.7"
