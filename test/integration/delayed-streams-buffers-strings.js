@@ -6,7 +6,7 @@ var fs = require('fs');
 var FILE1 = common.dir.fixture + '/file1.txt';
 var BUFFER = new Buffer('Bacon is delicious');
 var FILE2 = common.dir.fixture + '/file2.txt';
-var STRING = 'The € kicks the $\'s ass!';
+var STRING = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
 var EXPECTED =
   fs.readFileSync(FILE1)
