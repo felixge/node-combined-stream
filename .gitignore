@@ -1,6 +1,7 @@
 *.un~
 /node_modules
 /test/tmp
+yarn.lock
 
 Vim swap files
 .*.sw[a-z]
