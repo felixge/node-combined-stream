@@ -1,4 +1,5 @@
 *.un~
+*.log
 /node_modules
 /test/tmp
 yarn.lock
