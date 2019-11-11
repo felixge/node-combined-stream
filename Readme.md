@@ -73,6 +73,7 @@ Returns a new combined stream object. Available options are:
 
 * `maxDataSize`
 * `pauseStreams`
+* `autoEnd`
 
 The effect of those options is described below.
 
@@ -87,6 +88,13 @@ underlaying streams will be paused right after being appended, as well as when
 
 The maximum amount of bytes (or characters) to buffer for all source streams.
 If this value is exceeded, `combinedStream` emits an `'error'` event.
+
+### combinedStream.autoEnd = `true`
+
+If set to `true`, automatically ends the stream by calling 
+`combinedStream.end()` when the last stream emits `'end'`.
+If set to `false`, `combinedStream.end()` must be manually called to end the 
+stream.
 
 ### combinedStream.dataSize = `0`
 
